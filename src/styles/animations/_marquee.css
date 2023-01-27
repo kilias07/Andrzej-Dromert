@@ -1,0 +1,43 @@
+.marquee {
+  --move-initial: calc(-25%);
+  --move-final: calc(-50%);
+
+
+  @apply relative overflow-hidden;
+  &.animate .marquee__inner {
+    animation-play-state: running;
+  }
+  .marquee__inner {
+    @apply w-fit flex relative;
+    transform: translate3d(var(--move-initial), 0, 0);
+    animation: marquee 5s linear infinite;
+    animation-play-state: paused;
+    @media screen(lg) {
+      animation: marquee-lg 5s linear infinite;
+    }
+
+  }
+  .row-title {
+    @apply px-8;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate3d(var(--move-initial), 0, 0);
+  }
+
+  100% {
+    transform: translate3d(var(--move-final), 0, 0);
+  }
+}
+
+@keyframes marquee-lg {
+  0% {
+    transform: translate3d(calc(-25% + 15vw), 0, 0);
+  }
+
+  100% {
+    transform: translate3d(calc(-50% + 15vw), 0, 0);
+  }
+}

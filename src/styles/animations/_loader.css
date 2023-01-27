@@ -1,0 +1,29 @@
+@tailwind components;
+
+
+
+#image-1 {
+    width: 400px;
+    left: 16%;
+    bottom: 14%;
+}
+
+#image-3 {
+    width: 300px;
+    right: 12%;
+    top: 8%;
+
+}
+
+#image-4 {
+    width: 40%;
+    right: 20%;
+    bottom: 10%;
+}
+
+#image-5 {
+    width: 280px;
+    left: 14%;
+    top: 12%;
+}
+
