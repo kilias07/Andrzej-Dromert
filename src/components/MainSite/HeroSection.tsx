@@ -1,11 +1,10 @@
-import Image from "next/image";
-import { motion } from "framer-motion";
-import Link from "next/link";
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
 
-export const HeroSection = () => {
-  return (
-    <div className="w-full mx-auto container my-36">
-      <div className="relative mt-12 z-10">
+const HeroSection = () => (
+    <div className="container mx-auto my-36 w-full">
+      <div className="relative z-10 mt-12">
         <Image
           src="/assets/Hero.webp"
           alt="title"
@@ -20,8 +19,8 @@ export const HeroSection = () => {
         whileTap={{ scale: 0.9 }}
       >
         <Link href="blog/dupa">
-          <div className="absolute inset-y-0 right-4 -top-6 sm:-top-12 w-1/2 md:w-1/3 h-16 sm:h-24 bg-claretDark text-right rounded shadow-2xl text-backgroundColorTest p-1">
-            <h2 className="mt-5 sm:mt-11 text-xs sm:text-base font-light italic">
+          <div className="absolute inset-y-0 right-4 -top-6 h-16 w-1/2 rounded bg-claretDark p-1 text-right text-backgroundColorTest shadow-2xl sm:-top-12 sm:h-24 md:w-1/3">
+            <h2 className="mt-5 text-xs font-light italic sm:mt-11 sm:text-base">
               Nawiasem mówiąc
             </h2>
             <span className="text-xs">zobacz więcej</span>
@@ -29,5 +28,6 @@ export const HeroSection = () => {
         </Link>
       </motion.div>
     </div>
-  );
-};
+);
+
+export default HeroSection;

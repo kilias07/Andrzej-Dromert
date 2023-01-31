@@ -1,7 +1,7 @@
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
 const MenuButton = ({ isModalOpen }: { isModalOpen: boolean }) => {
-  const variant = isModalOpen ? "opened" : "closed";
+  const variant = isModalOpen ? 'opened' : 'closed';
   const top = {
     closed: {
       rotate: 0,
@@ -32,41 +32,41 @@ const MenuButton = ({ isModalOpen }: { isModalOpen: boolean }) => {
   };
 
   return (
-    <motion.svg
-      viewBox="0 0 6 4"
-      overflow="visible"
-      preserveAspectRatio="none"
-      className="w-7 h-4 stroke-1 stroke-black dark:stroke-white"
-      vectorEffect="non-scaling-stroke"
-      animate={variant}
-    >
-      <motion.line
-        x2="4"
-        variants={top}
-        initial="closed"
-        animate={variant}
-        vectorEffect="non-scaling-stroke"
-      />
-      <motion.line
-        x2="4"
-        y1="2"
-        y2="2"
-        variants={center}
-        initial="closed"
-        animate={variant}
-        vectorEffect="non-scaling-stroke"
-      />
-      <motion.line
-        x2="4"
-        y1="4"
-        y2="4"
-        variants={bottom}
-        initial="closed"
-        animate={variant}
-        vectorEffect="non-scaling-stroke"
-      />
-    </motion.svg>
+        <motion.svg
+            viewBox="0 0 6 4"
+            overflow="visible"
+            preserveAspectRatio="none"
+            className="w-7 h-4 stroke-1 stroke-black dark:stroke-white"
+            vectorEffect="non-scaling-stroke"
+            animate={variant}
+        >
+            <motion.line
+                x2="4"
+                variants={top}
+                initial="closed"
+                animate={variant}
+                vectorEffect="non-scaling-stroke"
+            />
+            <motion.line
+                x2="4"
+                y1="2"
+                y2="2"
+                variants={center}
+                initial="closed"
+                animate={variant}
+                vectorEffect="non-scaling-stroke"
+            />
+            <motion.line
+                x2="4"
+                y1="4"
+                y2="4"
+                variants={bottom}
+                initial="closed"
+                animate={variant}
+                vectorEffect="non-scaling-stroke"
+            />
+        </motion.svg>
   );
 };
 
-export { MenuButton };
+export default MenuButton;

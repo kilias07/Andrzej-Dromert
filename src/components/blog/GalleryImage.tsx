@@ -1,32 +1,31 @@
-import { NextPage } from "next";
-import { PostImages } from "../../types/PostImages";
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import { AnimatePresence, motion, MotionConfig } from "framer-motion";
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import { urlFor } from '@/lib/sanity.config';
+import { Images } from '@/lib/types';
+import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
+import { NextPage } from 'next';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 
 const collapsedAspectRatio = 1 / 2;
 const fullAspectRatio = 3 / 2;
 const gap = 2;
 const margin = 12;
 
-export const Gallery: NextPage<{ postImages: PostImages[] }> = ({
-  postImages,
-}) => {
-  let [index, setIndex] = useState(0);
+const Gallery: NextPage<{ postImages: Images[] }> = ({ postImages }) => {
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
     const eventListener = (event: KeyboardEvent) => {
-      if (event.key === "ArrowRight" && index + 1 < postImages.length) {
+      if (event.key === 'ArrowRight' && index + 1 < postImages.length) {
         setIndex(index + 1);
       }
-      if (event.key === "ArrowLeft" && index > 0) {
+      if (event.key === 'ArrowLeft' && index > 0) {
         setIndex((i) => i - 1);
       }
     };
-    window.addEventListener("keydown", eventListener);
+    window.addEventListener('keydown', eventListener);
     return () => {
-      window.removeEventListener("keydown", eventListener);
+      window.removeEventListener('keydown', eventListener);
     };
   }, [index]);
 
@@ -38,8 +37,8 @@ export const Gallery: NextPage<{ postImages: PostImages[] }> = ({
             <motion.div animate={{ x: `-${index * 100}%` }} className="flex">
               {postImages.map((image, i) => (
                 <motion.img
-                  key={image.public_id}
-                  src={image.url}
+                  key={image.asset._id}
+                  src={urlFor(image.asset).url()}
                   animate={{ opacity: i === index ? 1 : 0.3 }}
                   className="aspect-[3/2] object-contain"
                 />
@@ -50,7 +49,7 @@ export const Gallery: NextPage<{ postImages: PostImages[] }> = ({
                 <motion.button
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 0.7 }}
-                  exit={{ opacity: 0, pointerEvents: "none" }}
+                  exit={{ opacity: 0, pointerEvents: 'none' }}
                   whileHover={{ opacity: 1 }}
                   className="absolute left-2 top-1/2 -mt-4 flex h-8 w-8 items-center justify-center rounded-full bg-white"
                   onClick={() => setIndex(index - 1)}
@@ -65,7 +64,7 @@ export const Gallery: NextPage<{ postImages: PostImages[] }> = ({
                 <motion.button
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 0.7 }}
-                  exit={{ opacity: 0, pointerEvents: "none" }}
+                  exit={{ opacity: 0, pointerEvents: 'none' }}
                   whileHover={{ opacity: 1 }}
                   className="absolute right-2 top-1/2 -mt-4 flex h-8 w-8 items-center justify-center rounded-full bg-white"
                   onClick={() => setIndex(index + 1)}
@@ -81,9 +80,9 @@ export const Gallery: NextPage<{ postImages: PostImages[] }> = ({
               initial={false}
               animate={{
                 x: `-${
-                  index * 100 * (collapsedAspectRatio / fullAspectRatio) +
-                  index * gap +
-                  margin
+                  index * 100 * (collapsedAspectRatio / fullAspectRatio)
+                  + index * gap
+                  + margin
                 }%`,
               }}
               style={{
@@ -94,11 +93,11 @@ export const Gallery: NextPage<{ postImages: PostImages[] }> = ({
             >
               {postImages.map((image, i) => (
                 <motion.button
-                  key={image.public_id}
+                  key={image.asset._id}
                   onClick={() => setIndex(i)}
                   whileHover={{ opacity: 1 }}
                   initial={false}
-                  animate={i === index ? "active" : "inactive"}
+                  animate={i === index ? 'active' : 'inactive'}
                   variants={{
                     active: {
                       marginLeft: `${margin}%`,
@@ -107,22 +106,24 @@ export const Gallery: NextPage<{ postImages: PostImages[] }> = ({
                       aspectRatio: fullAspectRatio.toString(),
                     },
                     inactive: {
-                      marginLeft: "0%",
-                      marginRight: "0%",
+                      marginLeft: '0%',
+                      marginRight: '0%',
                       opacity: 0.5,
                       aspectRatio: collapsedAspectRatio.toString(),
                     },
                   }}
                   className="shrink-0"
                 >
-                  <motion.div className="h-full relative">
+                  <motion.div className="relative h-full">
                     <Image
-                      src={image.url}
+                      src={urlFor(image.asset).url()}
                       className="object-cover object-center"
                       fill
-                      sizes={`(max-width: 768px) 100vw, 50vw`}
+                      sizes={'(max-width: 768px) 100vw, 50vw'}
                       quality={20}
-                      alt={image.description}
+                      alt={image.asset.altText || image.asset.originalFilename!}
+                      placeholder="blur"
+                      blurDataURL={image.asset.metadata.lqip}
                     />
                   </motion.div>
                 </motion.button>
@@ -134,3 +135,5 @@ export const Gallery: NextPage<{ postImages: PostImages[] }> = ({
     </MotionConfig>
   );
 };
+
+export default Gallery;

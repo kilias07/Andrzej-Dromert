@@ -1,12 +1,19 @@
 {
-	"extends": ["next/core-web-vitals", "airbnb-base"],
-	"plugins": ["prettier"],
-	"env": {
-		"node": true,
-		"es6": true,
-		"browser": true
-	},
-	"rules": {
-		"no-console": "off"
-	}
+  "root": true,
+  "extends": [
+    "next/core-web-vitals",
+    "airbnb-base",
+    "airbnb-typescript",
+    "plugin:tailwindcss/recommended"
+  ],
+  "plugins": [
+    "prettier"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  //override airbnb-base rules
+  "rules": {
+    "no-underscore-dangle": "off"
+  }
 }

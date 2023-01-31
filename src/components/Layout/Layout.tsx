@@ -1,19 +1,18 @@
-import React from "react";
-import { Navbar } from "./Navbar/Navbar";
-import { Footer } from "./Footer";
-import { AnimatePresence } from "framer-motion";
-import Header from "./Navbar/Header";
+import React from 'react';
+import { AnimatePresence } from 'framer-motion';
+import Navbar from './Navbar/Navbar';
+import Footer from './Footer';
 
-interface children {
+interface Children {
   children: JSX.Element;
 }
 
-export const Layout = ({ children }: children) => {
-  return (
+const Layout = ({ children }: Children) => (
     <>
-      <Navbar />
-      <AnimatePresence mode="wait">{children}</AnimatePresence>
-      <Footer />
+        <Navbar/>
+        <AnimatePresence mode="wait">{children}</AnimatePresence>
+        <Footer/>
     </>
-  );
-};
+);
+
+export default Layout;

@@ -1,23 +1,36 @@
-import { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import ContentService from "../../../lib/contentfulClient";
-import { IPostsFields } from "../../../types/contentful";
-import Image from "next/image";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { RICHTEXT_OPTIONS } from "../../../components/contentfulRichText";
-import { Gallery } from "../../../components/blog/GalleryImage";
-import { PostImages } from "../../../types/PostImages";
-import { motion } from "framer-motion";
-import { useState } from "react";
+import Gallery from '@/components/blog/GalleryImage';
+import components from '@/lib/portableText';
+import { client, urlFor } from '@/lib/sanity.config';
+import { PostFields } from '@/lib/types';
+import { PortableText } from '@portabletext/react';
+import { motion } from 'framer-motion';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import { useNextSanityImage } from 'next-sanity-image';
+import Img from 'next/image';
 
 interface Props {
-  post: IPostsFields;
+  post: PostFields;
 }
 
 export const getStaticProps: GetStaticProps<Props, { slug: string }> = async (
-  ctx
+  ctx,
 ) => {
   const { slug } = ctx.params!;
-  const post = await ContentService.instance.getPostBySlug(slug);
+  const post = await client.fetch(
+    `*[_type == "post" && slug.current == $slug][0] {
+  ...,
+  categories[]->{title},
+  gallery {
+    images[] {
+      ...,
+      asset->,
+    }
+  },
+  slug,
+  title
+}`,
+    { slug },
+  );
 
   if (!post) {
     return { notFound: true };
@@ -25,27 +38,29 @@ export const getStaticProps: GetStaticProps<Props, { slug: string }> = async (
 
   return {
     props: {
-      post: post.fields,
+      post,
     },
   };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await ContentService.instance.getEntriesByType<IPostsFields>(
-    "posts"
+  const paths = await client.fetch(
+    `*[_type == "post" && defined(slug.current)]{
+        "params": {
+               "slug": slug.current
+            }
+        }`,
   );
   return {
-    paths: posts.map((post) => ({
-      params: {
-        slug: post.fields.slug,
-      },
-    })),
+    paths,
     fallback: false,
   };
 };
 
 const Index: NextPage<Props> = ({ post }) => {
-  const [test, setTest] = useState("");
+  const { title, body, gallery } = post;
+  const mainImage = gallery.images.find((image) => image.mainImage)!;
+  const imageProps = useNextSanityImage(client, mainImage);
   return (
     <motion.article
       className="container mx-auto h-fit"
@@ -54,26 +69,25 @@ const Index: NextPage<Props> = ({ post }) => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
     >
-      <h1 className="text-4xl md:text-6xl xl:text-9xl text-center leading-snug xl:leading-poppins-fit mt-20 md:my-20">
+      <h1 className="mt-20 text-center text-4xl leading-snug md:my-20 md:text-6xl xl:text-9xl xl:leading-poppins-fit">
         {post.title}
       </h1>
-      {post.postGallery.length === 1 ? (
+      {post.gallery.images.length === 1 ? (
         <div className="mx-auto max-w-5xl">
-          <Image
-            src={post.featuredImage[0].url}
-            alt="title"
+          <Img
+            {...imageProps}
+            src={urlFor(mainImage.asset).url()}
+            alt={mainImage.asset.altText || title}
             priority
-            layout="responsive"
-            width={post.featuredImage[0].width}
-            height={post.featuredImage[0].height}
-            objectFit="contain"
+            placeholder="blur"
+            blurDataURL={mainImage.asset.metadata.lqip}
           />
         </div>
       ) : (
-        <Gallery postImages={post.postGallery as PostImages[]} />
+        <Gallery postImages={post.gallery.images} />
       )}
-      <div className="w-10/12 mx-auto mb-24">
-        {documentToReactComponents(post.postText!, RICHTEXT_OPTIONS)}
+      <div className="mx-auto mb-24 w-10/12">
+        <PortableText value={body} components={components} />
       </div>
     </motion.article>
   );
