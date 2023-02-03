@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-// eslint-disable-next-line import/no-extraneous-dependencies
 //     @todo add next font
 const defaultTheme = require('tailwindcss/defaultTheme');
 
@@ -7,6 +6,7 @@ module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx}',
     './src/components/**/*.{js,ts,jsx,tsx}',
+    './src/lib/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {

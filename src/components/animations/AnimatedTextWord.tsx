@@ -1,7 +1,7 @@
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
 const AnimatedTextWord = ({ text }: { text: string }) => {
-  const words = text.split(" ");
+  const words = text.split(' ');
 
   // Variants for Container of words.
   const container = {
@@ -19,7 +19,7 @@ const AnimatedTextWord = ({ text }: { text: string }) => {
       opacity: 1,
       x: 0,
       transition: {
-        type: "spring",
+        type: 'spring',
         damping: 12,
         stiffness: 100,
       },
@@ -28,7 +28,7 @@ const AnimatedTextWord = ({ text }: { text: string }) => {
       opacity: 0,
       x: 20,
       transition: {
-        type: "spring",
+        type: 'spring',
         damping: 12,
         stiffness: 100,
       },
@@ -37,7 +37,7 @@ const AnimatedTextWord = ({ text }: { text: string }) => {
 
   return (
     <motion.div
-      style={{ overflow: "hidden", display: "flex", fontSize: "2rem" }}
+      style={{ overflow: 'hidden', display: 'flex', fontSize: '2rem' }}
       variants={container}
       initial="hidden"
       animate="visible"
@@ -45,7 +45,7 @@ const AnimatedTextWord = ({ text }: { text: string }) => {
       {words.map((word, index) => (
         <motion.span
           variants={child}
-          style={{ marginRight: "5px" }}
+          style={{ marginRight: '5px' }}
           key={index}
         >
           {word}

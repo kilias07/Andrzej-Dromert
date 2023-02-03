@@ -1,29 +1,32 @@
 @tailwind components;
 
 
+#image-1, #image-2, #image-3, #image-4, #image-5 {
+    @apply aspect-[3/2] object-contain;
+}
+
 
 #image-1 {
-    width: 400px;
-    left: 16%;
-    bottom: 14%;
+    left: 5%;
+    top: 6rem;
+    @apply sm:top-[8rem];
 }
 
 #image-3 {
-    width: 300px;
-    right: 12%;
-    top: 8%;
-
+    right: 5%;
+    top: 8rem;
+    @apply sm:top-[10rem];
 }
 
 #image-4 {
-    width: 40%;
-    right: 20%;
-    bottom: 10%;
+    right: 5%;
+    top: 25rem;
+    @apply sm:top-[32rem] md:top-[37rem] lg:top-[45rem] xl:top-[56rem] 2xl:top-[65rem];
 }
 
 #image-5 {
-    width: 280px;
-    left: 14%;
-    top: 12%;
+    left: 4%;
+    top: 23rem;
+    @apply sm:top-[30rem] md:top-[35rem] lg:top-[42rem] xl:top-[54rem] 2xl:top-[63rem];
 }
 

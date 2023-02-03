@@ -3,7 +3,7 @@ import type {
   PortableTextLink,
   PortableTextSpan,
 } from '@portabletext/types';
-import { SanityImageAsset } from '@sanity/asset-utils';
+import { SanityAssetDocument } from '@sanity/client';
 
 type MainImage = { mainImage: boolean };
 
@@ -15,28 +15,26 @@ type DefaultValues = {
   _type?: string;
 };
 
-type Images = MainImage & {
-  asset: SanityImageAsset &
-  DefaultValues & {
-    altText?: string;
-    assetId?: string;
-    description?: string;
-    extension?: string;
-  };
-  _type: 'image';
-  _key: string;
+type ImageSanityPluginMedia = {
+  altText: string;
+  assetId: string;
+  description: string;
+  extension: string;
 };
 
-export interface PostFields {
-  _createdAt?: Date;
-  _id: string;
-  _rev?: string;
-  _type?: string;
-  _updatedAt?: string;
+export interface ImageSanity
+  extends DefaultValues,
+  Partial<ImageSanityPluginMedia, DefaultValues> {
+  asset: ImageSanityPluginMedia & SanityAssetDocument;
+  _type: 'image';
+  _key?: string;
+}
+
+export interface PostFields extends DefaultValues {
   title: string;
   categories: Category[];
   gallery: {
-    images: [Images];
+    images: [ImageSanity & MainImage];
   };
   publishedAt: Date;
   body: PortableTextBlock<PortableTextSpan | PortableTextLink>[];
@@ -46,18 +44,32 @@ export interface PostFields {
   };
 }
 
-export type AboutFields =
-    DefaultValues &
-    Omit<Images, MainImage> &
-    {
-      body: PortableTextBlock<PortableTextSpan | PortableTextLink>[];
-    };
+export interface AboutFields extends DefaultValues {
+  title: string;
+  image: ImageSanity;
+  body: PortableTextBlock<PortableTextSpan | PortableTextLink>[];
+}
 
-interface Category {
+type Category = {
   _createdAt?: string;
   _updatedAt?: string;
   _id: string;
   _rev?: string;
   _type?: string;
   title: string;
+};
+
+export interface PortfolioAnimationData extends DefaultValues {
+  labels: {
+    topLabel: string;
+    bottomLabel: string;
+    shortDescription: string;
+  };
+  animationImages: {
+    leftBottomImageAnimation: ImageSanity;
+    leftTopImageAnimation: ImageSanity;
+    rightBottomImageAnimation: ImageSanity;
+    rightTopImageAnimation: ImageSanity;
+    mainImageAnimation: ImageSanity;
+  };
 }

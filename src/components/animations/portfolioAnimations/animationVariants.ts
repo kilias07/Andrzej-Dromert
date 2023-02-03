@@ -1,6 +1,6 @@
-import { Variants } from "framer-motion";
+import { Variants } from 'framer-motion';
 
-//Container of items
+// Container of items
 export const container: Variants = {
   show: {
     transition: {
@@ -9,7 +9,7 @@ export const container: Variants = {
   },
 };
 
-//Small Photo on Portfolio Page Animation
+// Small Photo on Portfolio Page Animation
 export const item: Variants = {
   hidden: { opacity: 0, y: 200 },
   show: {
@@ -24,13 +24,13 @@ export const item: Variants = {
     opacity: 0,
     y: -200,
     transition: {
-      ease: "easeInOut",
+      ease: 'easeInOut',
       duration: 0.8,
     },
   },
 };
 
-//Main Photo on Portfolio Page Animation
+// Main Photo on Portfolio Page Animation
 export const itemMain: Variants = {
   hidden: { opacity: 0, y: 300 },
   show: {
@@ -43,7 +43,7 @@ export const itemMain: Variants = {
   },
 };
 
-//Letter Animation
+// Letter Animation
 export const letterAni: Variants = {
   initial: { y: 400, opacity: 0 },
   animate: {
@@ -67,14 +67,14 @@ export const banner: Variants = {
 
 export const marqueeVariants: Variants = {
   animate: {
-    x: ["0%", "-100%"],
+    x: ['0%', '-100%'],
     transition: {
       delay: 0.1,
       x: {
         repeat: Infinity,
-        repeatType: "loop",
+        repeatType: 'loop',
         duration: 10,
-        ease: "linear",
+        ease: 'linear',
       },
     },
   },

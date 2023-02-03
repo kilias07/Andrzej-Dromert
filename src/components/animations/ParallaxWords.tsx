@@ -6,8 +6,8 @@ import {
   useSpring,
   useTransform,
   useVelocity,
-} from "framer-motion";
-import { useRef } from "react";
+} from 'framer-motion';
+import { useRef } from 'react';
 
 const wrap = (min: number, max: number, v: number) => {
   const rangeSize = max - min;
@@ -30,7 +30,7 @@ export function ParallaxText({ children }: { children: string }) {
   const skewVelocityFactor = useTransform(
     skewVelocity,
     [-1000, 1000],
-    [-30, 30]
+    [-30, 30],
   );
   const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
     clamp: false,

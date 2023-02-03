@@ -10,32 +10,34 @@
 /* PARTIALS */
 
 .max-w-screen-3xl {
-  max-width: 1920px;
+    max-width: 1920px;
 }
 
 .shadow-bottom {
-  box-shadow: 0 5px 5px -5px #333;
+    box-shadow: 0 5px 5px -5px #333;
 }
 
 .shadow-bottomDark {
-  box-shadow: 0 5px 5px -5px #fff;
+    box-shadow: 0 5px 5px -5px #fff;
 }
 
-.text-10xl {
-  font-size: 10rem;
+@layer utilities {
+    .text-10xl {
+        font-size: 10rem;
+    }
 }
 
 
 @layer base {
-  body,
-  nav {
-    @apply bg-backgroundColorTest;
-    @apply dark:bg-grayLight;
-  }
+    body,
+    nav {
+        @apply bg-backgroundColorTest;
+        @apply dark:bg-grayLight;
+    }
 }
 
 @layer utilities {
-  .heightAdjustScreen {
-    min-height: calc(100vh - 72px);
-  }
+    .heightAdjustScreen {
+        min-height: calc(100vh - 72px);
+    }
 }

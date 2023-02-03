@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const ProgressBar = () => {
   const { scrollYProgress } = useScroll();
@@ -7,7 +7,7 @@ const ProgressBar = () => {
   return (
     <motion.div
       style={{ scaleX }}
-      className="sticky top-[50px] left-0 h-0.5 bg-grayLight origin-[0%]"
+      className="sticky top-[50px] left-0 h-0.5 origin-[0%] bg-grayLight"
     />
   );
 };

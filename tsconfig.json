@@ -28,6 +28,7 @@
   "include": [
     "tailwind.config.js",
     "next-env.d.ts",
+    "**/*.js",
     "**/*.ts",
     "**/*.tsx"
   ],

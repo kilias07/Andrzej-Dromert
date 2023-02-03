@@ -1,5 +1,5 @@
 import { urlFor } from '@/lib/sanity.config';
-import { Images } from '@/lib/types';
+import { ImageSanity } from '@/lib/types';
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
 import { NextPage } from 'next';
 import Image from 'next/image';
@@ -11,7 +11,7 @@ const fullAspectRatio = 3 / 2;
 const gap = 2;
 const margin = 12;
 
-const Gallery: NextPage<{ postImages: Images[] }> = ({ postImages }) => {
+const Gallery: NextPage<{ postImages: ImageSanity[] }> = ({ postImages }) => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -119,8 +119,7 @@ const Gallery: NextPage<{ postImages: Images[] }> = ({ postImages }) => {
                       src={urlFor(image.asset).url()}
                       className="object-cover object-center"
                       fill
-                      sizes={'(max-width: 768px) 100vw, 50vw'}
-                      quality={20}
+                      quality={10}
                       alt={image.asset.altText || image.asset.originalFilename!}
                       placeholder="blur"
                       blurDataURL={image.asset.metadata.lqip}

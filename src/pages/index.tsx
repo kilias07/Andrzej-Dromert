@@ -13,9 +13,6 @@ interface Props {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  // const posts = await ContentService.instance.getEntriesByType<IPosts[]>(
-  //   'posts',
-  // );
   const posts = ['test'];
   return {
     props: {
@@ -29,7 +26,7 @@ const Home: NextPage<Props> = () => (
     exit={{ opacity: 0 }}
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
-    transition={{ duration: 2 }}
+    transition={{ duration: 1 }}
   >
     <HeroSection2 />
     <Statement />

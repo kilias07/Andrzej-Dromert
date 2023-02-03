@@ -1,5 +1,5 @@
 import { fadeInUp } from '@/components/animations/blogAnimation';
-import { Button } from '@/components/Button';
+import CustomBtn from '@/components/Button';
 import { client, urlFor } from '@/lib/sanity.config';
 import { PostFields } from '@/lib/types';
 import { motion } from 'framer-motion';
@@ -34,11 +34,8 @@ const BlogCard = ({ post }: Post) => {
       )}
       <div className="p-5 lg:basis-3/4">
         <h1 className="my-3 h-20 text-xl font-semibold">{title}</h1>
-
-        {/* @todo Add bpdy body */}
-        <p className="h-24">{'placeholder'}</p>
         <div className="flex items-center justify-between">
-          <Button link={`blog/${slug.current}`} />
+          <CustomBtn link={`blog/${slug.current}`} />
           <p className="text-xs text-grayLighter dark:text-grayLight">
             {new Date(publishedAt).toLocaleDateString('pl-PL')}
           </p>

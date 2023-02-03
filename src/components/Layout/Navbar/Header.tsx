@@ -1,12 +1,12 @@
-import { motion, useMotionTemplate, useTransform } from "framer-motion";
-import { useBoundedScroll } from "../../../hooks/useBoundedScroll";
+import { motion, useMotionTemplate, useTransform } from 'framer-motion';
+import useBoundedScroll from '../../../hooks/useBoundedScroll';
 
 export default function Header() {
   const { scrollYBoundedProgress } = useBoundedScroll(400);
   const scrollYBoundedProgressThrottled = useTransform(
     scrollYBoundedProgress,
     [0, 0.75, 1],
-    [0, 0, 1]
+    [0, 0, 1],
   );
 
   return (
@@ -17,12 +17,12 @@ export default function Header() {
             height: useTransform(
               scrollYBoundedProgressThrottled,
               [0, 1],
-              [80, 50]
+              [80, 50],
             ),
             backgroundColor: useMotionTemplate`rgb(255 255 255 / ${useTransform(
               scrollYBoundedProgressThrottled,
               [0, 1],
-              [1, 0.1]
+              [1, 0.1],
             )})`,
           }}
           className="fixed inset-x-0 flex h-20 shadow backdrop-blur-md"
@@ -33,7 +33,7 @@ export default function Header() {
                 scale: useTransform(
                   scrollYBoundedProgressThrottled,
                   [0, 1],
-                  [1, 0.9]
+                  [1, 0.9],
                 ),
               }}
               className="flex origin-left items-center text-xl font-semibold uppercase"
@@ -50,7 +50,7 @@ export default function Header() {
                 opacity: useTransform(
                   scrollYBoundedProgressThrottled,
                   [0, 1],
-                  [1, 0]
+                  [1, 0],
                 ),
               }}
               className="flex space-x-4 text-xs font-medium text-slate-400"
