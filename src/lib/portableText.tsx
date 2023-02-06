@@ -4,12 +4,17 @@ import { PortableTextComponents } from '@portabletext/react';
 import { useNextSanityImage } from 'next-sanity-image';
 import Img from 'next/image';
 
-const SanityImage = ({ asset }: { asset: ImageSanity }) => {
+const SanityImage = ({ asset }: { asset: ImageSanity['asset'] }) => {
   const imageProps = useNextSanityImage(client, asset);
 
   if (!imageProps) return null;
 
-  return <Img alt={'dupas'} {...imageProps} />;
+  return (
+    <Img
+      alt={asset.altText || asset.originalFilename || 'Brak opisu'}
+      {...imageProps}
+    />
+  );
 };
 
 const components: PortableTextComponents = {

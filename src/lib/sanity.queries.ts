@@ -1,6 +1,4 @@
-import { groq } from 'next-sanity';
-
-const postFields = groq`
+const postFields = `
     _id,
     categories->{
       name {
@@ -17,13 +15,13 @@ const postFields = groq`
     title
 `;
 
-export const PostsQuery = groq`*[_type == "post"]{
+export const PostsQuery = `*[_type == "post"]{
     ${postFields}
 }`;
 
-export const CategoryQuery = groq`*[_type == "category"]`;
+export const CategoryQuery = '*[_type == "category"]';
 
-export const postSlugQuery = groq`
+export const postSlugQuery = `
     ...,
     categories->{
       name {
@@ -47,13 +45,13 @@ export const postSlugQuery = groq`
     }
 `;
 
-export const postBySlugQuery = groq`
+export const postBySlugQuery = `
 *[_type == "post" && slug.current == $slug][0] {
 ${postSlugQuery}
 }
 `;
 
-export const portfolioAnimationQuery = groq`
+export const portfolioAnimationQuery = `
   *[_type == "portfolioAnimation"][0] {
 labels,
 animationImages {
