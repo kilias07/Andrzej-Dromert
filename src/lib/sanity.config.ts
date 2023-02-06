@@ -1,6 +1,6 @@
-import sanityClient from '@sanity/client';
 import ImageUrlBuilder from '@sanity/image-url';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import { createClient } from 'next-sanity';
 
 function assertValue<T>(v: T | undefined, errorMessage: string): T {
   if (v === undefined) {
@@ -22,7 +22,7 @@ export const projectId = assertValue(
   'Missing environment variable: NEXT_PUBLIC_SANITY_PROJECT_ID',
 );
 
-const client = sanityClient({
+const client = createClient({
   projectId,
   dataset,
   apiVersion,

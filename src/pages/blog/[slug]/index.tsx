@@ -1,7 +1,7 @@
 import Gallery from '@/components/blog/GalleryImage';
 import components from '@/lib/portableText';
 import { client, urlFor } from '@/lib/sanity.config';
-import { postBySlugQuery } from '@/lib/sanity.queries';
+import { postByIdQuery, postBySlugQuery } from '@/lib/sanity.queries';
 import { PostFields } from '@/lib/types';
 import { PortableText } from '@portabletext/react';
 import { motion } from 'framer-motion';
@@ -31,13 +31,7 @@ export const getStaticProps: GetStaticProps<Props, { slug: string }> = async (
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await client.fetch(
-    `*[_type == "post" && defined(slug.current)]{
-        "params": {
-               "slug": slug.current
-            }
-        }`,
-  );
+  const paths = await client.fetch(postByIdQuery);
   return {
     paths,
     fallback: false,

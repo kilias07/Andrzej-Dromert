@@ -2,23 +2,9 @@ import HeroSection from '@/components/MainSite/HeroSection';
 import HeroSection2 from '@/components/MainSite/HeroSection2';
 import Statement from '@/components/MainSite/Statement';
 import { motion } from 'framer-motion';
-import type { GetStaticProps, NextPage } from 'next';
 import Cta from '../components/MainSite/cta';
 
-interface Props {
-  posts: any;
-}
-
-export const getStaticProps: GetStaticProps = async () => {
-  const posts = ['test'];
-  return {
-    props: {
-      posts,
-    },
-  };
-};
-
-const Home: NextPage<Props> = () => (
+const Home = () => (
   <motion.div
     exit={{ opacity: 0 }}
     initial={{ opacity: 0 }}

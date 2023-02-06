@@ -1,5 +1,6 @@
 import components from '@/lib/portableText';
 import { client } from '@/lib/sanity.config';
+import { aboutQuery } from '@/lib/sanity.queries';
 import { AboutFields } from '@/lib/types';
 import { PortableText } from '@portabletext/react';
 import { motion } from 'framer-motion';
@@ -13,17 +14,7 @@ interface Props {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const [aboutMe] = await client.fetch(
-    `(*[_type == "about"] {
-    ...,
-        image {
-        ...,
-            asset->,
-        },
-        title
-    })
-  `,
-  );
+  const aboutMe = await client.fetch(aboutQuery);
   return {
     props: {
       aboutMe,

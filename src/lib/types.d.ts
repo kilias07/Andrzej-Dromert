@@ -3,7 +3,7 @@ import type {
   PortableTextLink,
   PortableTextSpan,
 } from '@portabletext/types';
-import { SanityAssetDocument } from '@sanity/client';
+import { SanityImageAsset } from '@sanity/asset-utils';
 
 type MainImage = { mainImage: boolean };
 
@@ -25,7 +25,7 @@ type ImageSanityPluginMedia = {
 export interface ImageSanity
   extends DefaultValues,
   Partial<ImageSanityPluginMedia, DefaultValues> {
-  asset: ImageSanityPluginMedia & SanityAssetDocument;
+  asset: ImageSanityPluginMedia & SanityImageAsset;
   _type: 'image';
   _key?: string;
 }
