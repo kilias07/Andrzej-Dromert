@@ -1,12 +1,9 @@
 import HeroSection from '@/components/MainSite/HeroSection';
 import HeroSection2 from '@/components/MainSite/HeroSection2';
 import Statement from '@/components/MainSite/Statement';
-import { Inter } from '@next/font/google';
 import { motion } from 'framer-motion';
 import type { GetStaticProps, NextPage } from 'next';
 import Cta from '../components/MainSite/cta';
-
-const inter = Inter({ subsets: ['latin'] });
 
 interface Props {
   posts: any;

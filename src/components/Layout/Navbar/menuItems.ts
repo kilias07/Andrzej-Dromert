@@ -3,21 +3,22 @@ type MenuItems = {
   title: string;
 };
 
-export const menuItems: MenuItems[] = [
+const menuItems: MenuItems[] = [
   {
-    link: "/about",
-    title: "O mnie",
+    link: '/about',
+    title: 'O mnie',
   },
   {
-    link: "/portfolio",
-    title: "Portfolio",
+    link: '/portfolio',
+    title: 'Portfolio',
   },
   {
-    link: "/blog",
-    title: "Blog",
+    link: '/blog',
+    title: 'Blog',
   },
   {
-    link: "/contact",
-    title: "Kontakt",
+    link: '/contact',
+    title: 'Kontakt',
   },
 ];
+export default menuItems;

@@ -1,6 +1,21 @@
+import { client } from '@/lib/sanity.config';
+import { ImageSanity } from '@/lib/types';
 import { PortableTextComponents } from '@portabletext/react';
+import { useNextSanityImage } from 'next-sanity-image';
+import Img from 'next/image';
+
+const SanityImage = ({ asset }: { asset: ImageSanity }) => {
+  const imageProps = useNextSanityImage(client, asset);
+
+  if (!imageProps) return null;
+
+  return <Img alt={'dupas'} {...imageProps} />;
+};
 
 const components: PortableTextComponents = {
+  types: {
+    image: ({ value }) => <SanityImage {...value} />,
+  },
   marks: {
     bold: ({ children }) => <strong className="font-medium">{children}</strong>,
     italic: ({ children }) => <em className="italic">{children}</em>,
@@ -15,6 +30,8 @@ const components: PortableTextComponents = {
         </a>
       );
     },
+    externalLink: ({ children }) => <div>{children}</div>,
+    internalLink: ({ children }) => <div>{children}</div>,
   },
   // @todo add class border-1
   block: {
@@ -29,7 +46,7 @@ const components: PortableTextComponents = {
     blockquote: ({ children }) => (
       <blockquote className="border-l-purple-500">{children}</blockquote>
     ),
-    hr: () => <hr className="border-1 my-8 h-px border-gray-200" />,
+    hr: () => <hr className="my-8 h-px border-1 border-gray-200" />,
   },
   list: {
     bullet: ({ children }) => <ul className="list-disc">{children}</ul>,

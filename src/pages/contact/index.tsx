@@ -16,7 +16,7 @@ const Contact = () => {
 
   return (
     <motion.div
-      className="content-inside heightAdjustScreen mx-auto flex w-5/6 items-center justify-center py-10"
+      className="heightAdjustScreen mx-auto flex w-5/6 items-center justify-center py-10"
       exit={{ opacity: 0 }}
       initial={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
@@ -96,7 +96,7 @@ const Contact = () => {
               Wiadomość
             </label>
             <textarea
-              className="no-resize mb-3 block h-48 w-full resize-none appearance-none rounded border border-gray-200 bg-gray-200 py-3 px-4 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
+              className="mb-3 block h-48 w-full resize-none appearance-none rounded border border-gray-200 bg-gray-200 py-3 px-4 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
               id="message"
               {...register('message', { required: true })}
             />
@@ -110,7 +110,7 @@ const Contact = () => {
         <div className="md:flex md:items-center">
           <div className="md:w-1/3">
             <button
-              className="focus:shadow-outline rounded bg-claretDark py-2 px-4 font-semibold text-white shadow hover:bg-gray-600 focus:outline-none"
+              className="rounded bg-claretDark py-2 px-4 font-semibold text-white shadow hover:bg-gray-600 focus:outline-none"
               type="submit"
             >
               Wyślij

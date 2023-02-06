@@ -5,7 +5,7 @@ import { useRef, useState } from 'react';
 import useOnClickOutside from '../../../hooks/useClickOutside';
 import Logo from './Logo';
 import MenuButton from './MenuButtons';
-import { menuItems } from './menuItems';
+import menuItems from './menuItems';
 import Theme from './Theme';
 
 type Ref = HTMLElement | null;

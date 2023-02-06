@@ -37,7 +37,7 @@ export interface PostFields extends DefaultValues {
     images: [ImageSanity & MainImage];
   };
   publishedAt: Date;
-  body: PortableTextBlock<PortableTextSpan | PortableTextLink>[];
+  body: (PortableTextBlock & ImageSanity)[];
   slug: {
     _type?: string;
     current: string;

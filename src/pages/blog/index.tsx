@@ -19,6 +19,18 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
+const LackOfResults = () => (
+  <div>
+    <h1>Brak wyników</h1>
+  </div>
+);
+
+const NoResults = () => (
+  <div>
+    <h1>Jeszcze nie ma żadnych postów</h1>
+  </div>
+);
+
 const Blog: NextPage<{ posts: PostFields[] }> = ({ posts }) => {
   const [searchPosts, setSearchPosts] = useState<PostFields[]>(posts);
   const searchItem = (query: string) => {
@@ -41,6 +53,7 @@ const Blog: NextPage<{ posts: PostFields[] }> = ({ posts }) => {
       setSearchPosts([]);
     }
   };
+  if (posts.length === 0) return <NoResults />;
 
   return (
     <motion.div
@@ -51,15 +64,15 @@ const Blog: NextPage<{ posts: PostFields[] }> = ({ posts }) => {
       animate="animate"
     >
       <SearchPosts searchItem={searchItem} />
-      {/* {searchPosts.length === 0 ? ( */}
-      {/*  <div>brak wyników</div> */}
-      {/* ) : ( */}
-      <motion.div className="lg:w-3/4" variants={stagger}>
-        {searchPosts.map((post) => (
-          <BlogCard post={post} key={post._id} />
-        ))}
-      </motion.div>
-      {/* )} */}
+      {searchPosts.length === 0 ? (
+        <LackOfResults />
+      ) : (
+        <motion.div className="lg:w-3/4" variants={stagger}>
+          {searchPosts.map((post) => (
+            <BlogCard post={post} key={post._id} />
+          ))}
+        </motion.div>
+      )}
     </motion.div>
   );
 };

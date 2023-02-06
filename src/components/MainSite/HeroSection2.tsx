@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Logo } from '../Layout/Navbar/Logo';
+import Logo from '../Layout/Navbar/Logo';
 
 const HeroSection2 = () => (
   <section className="max-w-screen-3xl mx-auto">
@@ -19,7 +19,7 @@ const HeroSection2 = () => (
           </div>
         </div>
       </div>
-      <div className="sm:1/2 relative w-2/3">
+      <div className="relative w-2/3 sm:w-1/2">
         <Image
           src="/assets/Heroimage test.webp"
           alt="title"

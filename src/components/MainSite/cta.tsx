@@ -1,7 +1,7 @@
-import { m } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const Cta = () => (
-  <m.section
+  <motion.section
     className="max-w-screen-3xl mx-auto my-20 flex flex-wrap justify-center gap-10"
     initial={{ opacity: 0 }}
     whileInView={{ opacity: 1 }}
@@ -58,7 +58,7 @@ const Cta = () => (
         rozwiązań
       </p>
     </div>
-  </m.section>
+  </motion.section>
 );
 
 export default Cta;

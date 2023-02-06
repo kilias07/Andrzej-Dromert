@@ -33,6 +33,7 @@ module.exports = {
         'poppins-fit': '8.5rem',
       },
       borderWidth: {
+        1: '1px',
         5: '5px',
         6: '6px',
       },

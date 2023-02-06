@@ -1,7 +1,7 @@
 import { groq } from 'next-sanity';
 
 const postFields = groq`
-    ...,
+    _id,
     categories->{
       name {
       current
@@ -20,19 +20,36 @@ const postFields = groq`
 export const PostsQuery = groq`*[_type == "post"]{
     ${postFields}
 }`;
-/* eslint-disable */
+
 export const CategoryQuery = groq`*[_type == "category"]`;
 
-/* eslint-disable */
-
-export const postSlugsQuery = groq`
-*[_type == "post" && defined(slug.current)][].slug.current
+export const postSlugQuery = groq`
+    ...,
+    categories->{
+      name {
+      current
+      },
+                },
+    gallery {
+    images[] {
+      ...,
+      asset->,
+    }
+    },
+    slug,
+    title,
+    body[] {
+        ...,
+        _type == "image" => {
+            ...,
+            asset->
+        }
+    }
 `;
 
-/* eslint-disable */
 export const postBySlugQuery = groq`
 *[_type == "post" && slug.current == $slug][0] {
-${postFields}
+${postSlugQuery}
 }
 `;
 

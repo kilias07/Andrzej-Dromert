@@ -27,7 +27,7 @@ const Gallery: NextPage<{ postImages: ImageSanity[] }> = ({ postImages }) => {
     return () => {
       window.removeEventListener('keydown', eventListener);
     };
-  }, [index]);
+  }, [index, postImages.length]);
 
   return (
     <MotionConfig transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}>

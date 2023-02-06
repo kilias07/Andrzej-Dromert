@@ -1,6 +1,7 @@
 import Gallery from '@/components/blog/GalleryImage';
 import components from '@/lib/portableText';
 import { client, urlFor } from '@/lib/sanity.config';
+import { postBySlugQuery } from '@/lib/sanity.queries';
 import { PostFields } from '@/lib/types';
 import { PortableText } from '@portabletext/react';
 import { motion } from 'framer-motion';
@@ -16,21 +17,7 @@ export const getStaticProps: GetStaticProps<Props, { slug: string }> = async (
   ctx,
 ) => {
   const { slug } = ctx.params!;
-  const post = await client.fetch(
-    `*[_type == "post" && slug.current == $slug][0] {
-  ...,
-  categories[]->{title},
-  gallery {
-    images[] {
-      ...,
-      asset->,
-    }
-  },
-  slug,
-  title
-}`,
-    { slug },
-  );
+  const post = await client.fetch(postBySlugQuery, { slug });
 
   if (!post) {
     return { notFound: true };
