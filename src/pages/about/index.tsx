@@ -4,7 +4,6 @@ import { AboutFields } from '@/lib/types';
 import { PortableText } from '@portabletext/react';
 import { motion } from 'framer-motion';
 import { GetStaticProps, NextPage } from 'next';
-import { groq } from 'next-sanity';
 import { useNextSanityImage } from 'next-sanity-image';
 import Img from 'next/image';
 import ProgressBar from '../../components/animations/ProgrsBar';
@@ -15,7 +14,7 @@ interface Props {
 
 export const getStaticProps: GetStaticProps = async () => {
   const [aboutMe] = await client.fetch(
-    groq`(*[_type == "about"] {
+    `(*[_type == "about"] {
     ...,
         image {
         ...,
