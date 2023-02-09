@@ -64,18 +64,18 @@ export const banner: Variants = {
     },
   },
 };
-
-export const marqueeVariants: Variants = {
-  animate: {
-    x: ['0%', '-100%'],
-    transition: {
-      delay: 0.1,
-      x: {
-        repeat: Infinity,
-        repeatType: 'loop',
-        duration: 10,
-        ease: 'linear',
-      },
-    },
-  },
-};
+//
+// export const marqueeVariants: Variants = {
+//   animate: {
+//     x: ['0%', '-100%'],
+//     transition: {
+//       delay: 0.1,
+//       x: {
+//         repeat: Infinity,
+//         repeatType: 'loop',
+//         duration: 10,
+//         ease: 'linear',
+//       },
+//     },
+//   },
+// };

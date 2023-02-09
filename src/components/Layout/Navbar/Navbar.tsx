@@ -63,7 +63,7 @@ const Navbar = () => {
               }}
             />
             <motion.span
-              className="font-lato lg:text-2xl"
+              className="shrink-0 lg:text-2xl"
               style={{
                 scale: useTransform(
                   scrollYBoundedProgressThrottled,

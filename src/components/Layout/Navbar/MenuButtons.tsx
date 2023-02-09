@@ -42,6 +42,8 @@ const MenuButton = ({ isModalOpen }: { isModalOpen: boolean }) => {
     >
       <motion.line
         x2="4"
+        y1="0"
+        y2="0"
         variants={top}
         initial="closed"
         animate={variant}

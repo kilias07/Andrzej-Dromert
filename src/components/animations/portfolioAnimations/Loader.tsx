@@ -26,7 +26,8 @@ export const ImageBlock = ({ variants, id, img }: ImageBlockProps) => {
     <motion.div id={id} variants={variants} className="absolute w-[42%]">
       <Image
         {...UseImgProps(img)}
-        quality={70}
+        quality={60}
+        priority={true}
         alt={img.asset.altText || img.asset.originalFilename! || 'image'}
       />
     </motion.div>
@@ -45,41 +46,39 @@ const Loader = ({ setLoading, portfolioAnimationImages }: LoaderProps) => {
   const mainImgProp = UseImgProps(mainImageAnimation);
 
   return (
-    <motion.div>
-      <motion.div
-        variants={container}
-        onAnimationComplete={() => setLoading(false)}
-        initial="hidden"
-        animate="show"
-        exit="exit"
-      >
-        <ImageBlock
-          variants={item}
-          id="image-1"
-          img={leftBottomImageAnimation}
-        />
+    <motion.div
+      variants={container}
+      onAnimationComplete={() => setLoading(false)}
+      initial="hidden"
+      animate="show"
+      exit="exit"
+    >
+      <ImageBlock variants={item} id="image-1" img={leftBottomImageAnimation} />
+      <div className="flex justify-center">
         <motion.div
-          className="absolute left-1/2 top-[15rem] w-1/2 sm:top-[19rem] md:top-[22rem] lg:top-[25rem] xl:top-[30rem] 2xl:top-[35rem]"
+          className="absolute top-[15rem] aspect-[4/3] w-1/2 sm:top-[19rem] md:top-[22rem] lg:top-[25rem] xl:top-[30rem] 2xl:top-[35rem]"
           variants={itemMain}
           layoutId="main-image-1"
         >
           <Image
-            {...mainImgProp}
             alt={
               mainImageAnimation.asset.altText
               || mainImageAnimation.asset.originalFilename!
             }
-            className="relative -translate-x-1/2"
+            {...mainImgProp}
+            priority={true}
+            quality={60}
+            className="object-contain"
           />
         </motion.div>
-        <ImageBlock variants={item} id="image-3" img={leftTopImageAnimation} />
-        <ImageBlock
-          variants={item}
-          id="image-4"
-          img={rightBottomImageAnimation}
-        />
-        <ImageBlock variants={item} id="image-5" img={rightTopImageAnimation} />
-      </motion.div>
+      </div>
+      <ImageBlock variants={item} id="image-3" img={leftTopImageAnimation} />
+      <ImageBlock
+        variants={item}
+        id="image-4"
+        img={rightBottomImageAnimation}
+      />
+      <ImageBlock variants={item} id="image-5" img={rightTopImageAnimation} />
     </motion.div>
   );
 };

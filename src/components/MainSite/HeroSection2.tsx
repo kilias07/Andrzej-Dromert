@@ -10,7 +10,7 @@ const HeroSection2 = () => (
             <Logo />
           </div>
           <div className="mt-10 flex flex-col items-end">
-            <h1 className="ml-1 w-36 font-lato text-sm font-bold uppercase sm:w-auto sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">
+            <h1 className="ml-1 w-36 text-sm uppercase sm:w-auto sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">
               Andrzej Dromert
             </h1>
             <p className="mr-3 mb-2 mt-1 w-32 text-right text-xs sm:mr-1 lg:w-44 lg:text-xl">

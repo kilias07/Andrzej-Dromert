@@ -3,17 +3,24 @@ import { PortfolioAnimationData } from '@/lib/types';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useNextSanityImage } from 'next-sanity-image';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { RefObject, useEffect } from 'react';
 import Banner from './Baner';
 import Loader from './Loader';
 
+// @todo proper typing setLoading and loading
+interface PortfolioAnimationProps {
+  setLoading: Function;
+  loading: boolean;
+  portfolioAnimationData: PortfolioAnimationData;
+  reference?: RefObject<HTMLUListElement> | null;
+}
+
 const PortfolioAnimation = ({
   portfolioAnimationData,
-}: {
-  portfolioAnimationData: PortfolioAnimationData;
-}) => {
-  const [loading, setLoading] = useState(true);
-
+  loading,
+  setLoading,
+  reference,
+}: PortfolioAnimationProps) => {
   useEffect(
     () => (loading
       ? document.querySelector('body')!.classList.add('loading')
@@ -23,40 +30,44 @@ const PortfolioAnimation = ({
 
   const { mainImageAnimation } = portfolioAnimationData.animationImages;
   const mainImgProp = useNextSanityImage(client, mainImageAnimation);
-
   return (
-    <div className="min-h-[36rem] overflow-x-hidden lg:min-h-screen">
-      <AnimatePresence>
-        {loading ? (
-          <motion.div key="loader">
-            <Loader
-              setLoading={setLoading}
-              portfolioAnimationImages={portfolioAnimationData.animationImages}
-            />
-          </motion.div>
-        ) : (
-          <>
-            <Banner portfolioAnimationLabels={portfolioAnimationData.labels} />
-            {!loading && (
+    <AnimatePresence>
+      {loading ? (
+        <motion.div key="loader">
+          <Loader
+            setLoading={setLoading}
+            portfolioAnimationImages={portfolioAnimationData.animationImages}
+          />
+        </motion.div>
+      ) : (
+        <>
+          <Banner
+            portfolioAnimationLabels={portfolioAnimationData.labels}
+            reference={reference}
+          />
+          {!loading && (
+            <div className="container relative top-[-2rem] mx-auto flex justify-center lg:top-[-5rem]">
               <motion.div
-                className="container relative -top-8 left-1/2 -z-10 w-fit lg:-top-16"
+                className="relative aspect-[4/3] w-full"
                 transition={{ ease: [0.6, 0.01, -0.05, 0.9], duration: 1.6 }}
                 layoutId="main-image-1"
               >
                 <Image
                   {...mainImgProp}
+                  priority={true}
+                  quality={60}
                   alt={
                     mainImageAnimation.asset.altText
                     || mainImageAnimation.asset.originalFilename!
                   }
-                  className="relative -translate-x-1/2"
+                  className="object-contain"
                 />
               </motion.div>
-            )}
-          </>
-        )}
-      </AnimatePresence>
-    </div>
+            </div>
+          )}
+        </>
+      )}
+    </AnimatePresence>
   );
 };
 

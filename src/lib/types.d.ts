@@ -50,14 +50,14 @@ export interface AboutFields extends DefaultValues {
   body: PortableTextBlock<PortableTextSpan | PortableTextLink>[];
 }
 
-type Category = {
-  _createdAt?: string;
-  _updatedAt?: string;
+export interface Categories {
+  name: string;
   _id: string;
-  _rev?: string;
-  _type?: string;
-  title: string;
-};
+}
+
+export interface CategoryWithSlug extends Categories {
+  slug: string;
+}
 
 export interface PortfolioAnimationData extends DefaultValues {
   labels: {

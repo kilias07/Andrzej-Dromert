@@ -1,7 +1,7 @@
-/** @type {import('tailwindcss').Config} */
-//     @todo add next font
-const defaultTheme = require('tailwindcss/defaultTheme');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const { fontFamily } = require('tailwindcss/defaultTheme');
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx}',
@@ -25,9 +25,7 @@ module.exports = {
         xsm: '380px',
       },
       fontFamily: {
-        lato: ['Lato', 'sans-serif'],
-        poppins: ['poppins', 'sans-serif'],
-        sans: ['poppins', ...defaultTheme.fontFamily.sans],
+        sans: ['var(--font-poppins)', ...fontFamily.sans],
       },
       lineHeight: {
         'poppins-fit': '8.5rem',

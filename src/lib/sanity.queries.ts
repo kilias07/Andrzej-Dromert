@@ -14,14 +14,22 @@ const postFields = groq`
             }
     },
     slug,
-    title
+    title,
+    publishedAt,
 `;
 
-export const PostsQuery = groq`*[_type == "post"]{
+export const PostsQuery = groq`
+*[_type == "post"]{
     ${postFields}
-}`;
+}
+`;
 
-export const CategoryQuery = groq`*[_type == "category"]`;
+export const categoryQuery = groq`
+*[_type == "media.tag"] {
+    _id,
+    "name": name.current
+}
+`;
 
 export const postSlugQuery = `
     ...,

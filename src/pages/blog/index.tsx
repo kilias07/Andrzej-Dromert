@@ -5,6 +5,7 @@ import { PostFields } from '@/lib/types';
 import { motion } from 'framer-motion';
 import Fuse from 'fuse.js';
 import { GetStaticProps, NextPage } from 'next';
+import Head from 'next/head';
 import { useState } from 'react';
 import BlogCard from '../../components/blog/BlogCard';
 import SearchPosts from '../../components/blog/searchPosts';
@@ -16,18 +17,19 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       posts,
     },
+    revalidate: 10,
   };
 };
 
 const LackOfResults = () => (
-  <div>
-    <h1>Brak wyników</h1>
+  <div className="flex min-h-[50vh] w-full items-center justify-center">
+    <h1 className="text-2xl">Brak wyników</h1>
   </div>
 );
 
 const NoResults = () => (
-  <div>
-    <h1>Jeszcze nie ma żadnych postów</h1>
+  <div className="flex min-h-[50vh] w-full items-center justify-center">
+    <h1 className="text-2xl">Jeszcze nie ma żadnych postów</h1>
   </div>
 );
 
@@ -56,24 +58,30 @@ const Blog: NextPage<{ posts: PostFields[] }> = ({ posts }) => {
   if (posts.length === 0) return <NoResults />;
 
   return (
-    <motion.div
-      className="heightAdjustScreen container mx-auto flex flex-col items-center lg:flex-row lg:items-start"
-      key="blog"
-      exit={{ opacity: 0 }}
-      initial="initial"
-      animate="animate"
-    >
-      <SearchPosts searchItem={searchItem} />
-      {searchPosts.length === 0 ? (
-        <LackOfResults />
-      ) : (
-        <motion.div className="lg:w-3/4" variants={stagger}>
-          {searchPosts.map((post) => (
-            <BlogCard post={post} key={post._id} />
-          ))}
-        </motion.div>
-      )}
-    </motion.div>
+    <>
+      <Head>
+        <title>Andrzej Dromert - Blog</title>
+        <meta property={'og:title'} content={'blog'} />
+      </Head>
+      <motion.div
+        className="heightAdjustScreen container mx-auto flex flex-col items-center lg:flex-row lg:items-start"
+        key="blog"
+        exit={{ opacity: 0 }}
+        initial="initial"
+        animate="animate"
+      >
+        <SearchPosts searchItem={searchItem} />
+        {searchPosts.length === 0 ? (
+          <LackOfResults />
+        ) : (
+          <motion.div className="lg:w-3/4" variants={stagger}>
+            {searchPosts.map((post) => (
+              <BlogCard post={post} key={post._id} />
+            ))}
+          </motion.div>
+        )}
+      </motion.div>
+    </>
   );
 };
 

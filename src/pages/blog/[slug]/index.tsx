@@ -27,6 +27,7 @@ export const getStaticProps: GetStaticProps<Props, { slug: string }> = async (
     props: {
       post,
     },
+    revalidate: 10,
   };
 };
 
