@@ -13,7 +13,7 @@ const Cta = () => (
         <div className="h-28 w-28 rotate-45 bg-cta"></div>
         <div className="absolute top-56 h-14 w-24 border-5 border-black"></div>
       </div>
-      <h3 className="flex h-16 items-center justify-center text-2xl">Rzeźba</h3>
+      <h2 className="flex h-16 items-center justify-center text-2xl">Rzeźba</h2>
       <p className="flex h-20 items-center justify-center">
         przestrzenne autorskie formy wykonane nie tylko w kamieniu
       </p>
@@ -24,9 +24,9 @@ const Cta = () => (
         <div className="relative top-6 h-28 w-28 -translate-y-3 rotate-45 bg-cta"></div>
         <div className="absolute top-12 left-52 h-52 w-12 border-5 border-black"></div>
       </div>
-      <h3 className="flex h-16 items-center justify-center text-2xl">
+      <h2 className="flex h-16 items-center justify-center text-2xl">
         Kompozycje półprzestrzenne/instalacje
-      </h3>
+      </h2>
       <p className="flex h-20 items-center justify-center">
         twory niepasujące do kategorii ani po lewej, ani prawej stronie
       </p>
@@ -37,9 +37,9 @@ const Cta = () => (
         <div className="absolute left-26 h-28 w-28 rotate-45 bg-cta"></div>
         <div className="z-10 inline-block h-44 w-44 border-5 border-black"></div>
       </div>
-      <h3 className="flex h-16 items-center justify-center text-2xl">
+      <h2 className="flex h-16 items-center justify-center text-2xl">
         Realizacje na zamówienie
-      </h3>
+      </h2>
       <p className="flex h-20 items-center justify-center">
         różności powstałe na zlecenie lub w celach konkursowych
       </p>
@@ -50,9 +50,9 @@ const Cta = () => (
         <div className="absolute left-26 top-20 z-0 h-28 w-28 rotate-45 bg-cta"></div>
         <div className="z-10 inline-block h-64 w-42 border-5 border-black"></div>
       </div>
-      <h3 className="flex h-16 items-center justify-center text-2xl">
+      <h2 className="flex h-16 items-center justify-center text-2xl">
         Rysunek
-      </h3>
+      </h2>
       <p className="flex h-20 items-center justify-center">
         Prace wykonane najczęściej na płaszczyźnie, za pomocą własnych technik i
         rozwiązań

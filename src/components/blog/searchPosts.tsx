@@ -15,7 +15,7 @@ const SearchPosts = ({ searchItem }: { searchItem: SearchPostsProps }) => (
         <input
           type="search"
           className="mb-3 block appearance-none rounded border border-gray-200 bg-gray-200 py-3 px-4 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
-          placeholder="Szukaj"
+          placeholder="Wpisz tytuł lub kategorię"
           name="search"
           onChange={(e: FormEvent<HTMLInputElement>) => searchItem(e.currentTarget.value)
           }

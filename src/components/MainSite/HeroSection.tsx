@@ -1,17 +1,12 @@
 import { motion } from 'framer-motion';
-import Image from 'next/image';
+import Img from 'next/image';
 import Link from 'next/link';
+import Hero from 'public/assets/Hero.webp';
 
 const HeroSection = () => (
   <div className="container mx-auto my-36 w-full">
     <div className="relative z-10 mt-12">
-      <Image
-        src="/assets/Hero.webp"
-        alt="title"
-        priority
-        width="3051"
-        height="1228"
-      />
+      <Img src={Hero} alt="title" width="3051" height="1228" />
     </div>
     <motion.div
       className="relative w-full"

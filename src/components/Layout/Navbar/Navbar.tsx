@@ -8,7 +8,7 @@ import MenuButton from './MenuButtons';
 import menuItems from './menuItems';
 import Theme from './Theme';
 
-type Ref = HTMLElement | null;
+type Ref = HTMLDivElement | null;
 
 const Navbar = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -28,8 +28,8 @@ const Navbar = () => {
   }
 
   return (
-    <div className="h-[100px]">
-      <motion.nav
+    <nav className="h-[100px]">
+      <motion.div
         ref={refNavbar}
         className="shadow-bottom fixed inset-0 z-50 bg-backgroundColorTest"
         style={{
@@ -136,8 +136,8 @@ const Navbar = () => {
             </motion.ul>
           )}
         </AnimatePresence>
-      </motion.nav>
-    </div>
+      </motion.div>
+    </nav>
   );
 };
 

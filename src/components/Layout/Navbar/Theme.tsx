@@ -46,10 +46,10 @@ const Theme = () => {
   ];
 
   if (!mounted) return null;
-
   return (
     <div ref={ulRef} className="relative mt-1">
       <button
+        aria-label={`Zmień motyw z ${resolvedTheme}`}
         onClick={() => {
           setShowDialog((prev) => !prev);
         }}

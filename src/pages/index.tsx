@@ -6,7 +6,7 @@ import Head from 'next/head';
 import Cta from '../components/MainSite/cta';
 
 const Home = () => (
-  <>
+  <main>
     <Head>
       <title>Andrzej Dromert - Strona główna</title>
       <meta property={'og:title'} content="Strona główna" />
@@ -22,7 +22,7 @@ const Home = () => (
       <Cta />
       <HeroSection />
     </motion.div>
-  </>
+  </main>
 );
 
 export default Home;

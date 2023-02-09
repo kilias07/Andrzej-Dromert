@@ -12,6 +12,7 @@ const Footer = () => (
           href="https://www.facebook.com/andrzej.dromert"
           target="_blank"
           rel="noreferrer noopener"
+          aria-label="Idź do mojego profilu na Facebooku"
         >
           <GrFacebook className="fill-grayLighter text-4xl" />
         </a>
@@ -19,6 +20,7 @@ const Footer = () => (
           href="https://www.instagram.com/andrzej_dromert/"
           target="_blank"
           rel="noreferrer noopener"
+          aria-label="Idź do mojego profilu na Instagramie"
         >
           <GrInstagram className="fill-grayLighter text-4xl" />
         </a>

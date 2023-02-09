@@ -1,4 +1,5 @@
-import Image from 'next/image';
+import Img from 'next/image';
+import HeroImage from 'public/assets/Heroimage test.webp';
 import Logo from '../Layout/Navbar/Logo';
 
 const HeroSection2 = () => (
@@ -20,13 +21,7 @@ const HeroSection2 = () => (
         </div>
       </div>
       <div className="relative w-2/3 sm:w-1/2">
-        <Image
-          src="/assets/Heroimage test.webp"
-          alt="title"
-          priority
-          width="1347"
-          height="959"
-        />
+        <Img src={HeroImage} alt="title" width="1347" height="959" />
       </div>
     </div>
     <div className="h-1 w-6/12 bg-claretDark"></div>
