@@ -36,29 +36,26 @@ export default function Document() {
         />
         <link rel="manifest" href="/assets/favicons/site.webmanifest" />
         <Partytown debug={true} forward={['dataLayer.push']} />
-      </Head>
-      <body>
-        <Main />
-        <NextScript>
-          <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=G-6GZZBNTRWQ"
-            type="text/partytown"
-          ></script>
-          {/* eslint-disable-next-line @next/next/no-sync-scripts,@next/next/next-script-for-ga */}
-          <script
-            type="text/partytown"
-            src="https://www.googletagmanager.com/gtag/js?id=G-6GZZBNTRWQ"
-            dangerouslySetInnerHTML={{
-              __html: `window.dataLayer = window.dataLayer || [];
+        <script
+          type="text/partytown"
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
 
               gtag('config', 'G-6GZZBNTRWQ');
             `,
-            }}
-          />
-        </NextScript>
+          }}
+        />
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-6GZZBNTRWQ"
+          type="text/partytown"
+        ></script>
+      </Head>
+      <body>
+        <Main />
+        <NextScript />
       </body>
     </Html>
   );
