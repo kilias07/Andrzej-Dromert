@@ -16,7 +16,10 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+        />
         <title>Andrzej Dromert</title>
       </Head>
       <>
@@ -25,13 +28,13 @@ export default function App({ Component, pageProps }: AppProps) {
             font-family: ${poppins.style.fontFamily};
           }
         `}</style>
-        <MotionConfig reducedMotion="user">
-          <ThemeProvider attribute="class">
+        <ThemeProvider attribute="class">
+          <MotionConfig reducedMotion="user">
             <Layout>
               <Component {...pageProps} />
             </Layout>
-          </ThemeProvider>
-        </MotionConfig>
+          </MotionConfig>
+        </ThemeProvider>
       </>
     </>
   );

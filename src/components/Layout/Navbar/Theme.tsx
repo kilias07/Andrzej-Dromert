@@ -62,7 +62,7 @@ const Theme = () => {
             initial="closed"
             animate={variant}
             transition={{ duration: 0.4, ease: 'easeInOut' }}
-            className="absolute top-8 -left-14 w-fit rounded-md border border-grayLighter bg-backgroundColorTest p-2 shadow-2xl dark:bg-grayLight"
+            className="absolute top-8 -left-14 w-fit rounded-md border border-grayLighter  bg-backgroundColorLight p-2 shadow-2xl dark:bg-backgroundColorDark"
             onClick={() => setShowDialog(false)}
             variants={animate}
             exit="closed"

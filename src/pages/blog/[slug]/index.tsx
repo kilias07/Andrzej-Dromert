@@ -19,10 +19,6 @@ export const getStaticProps: GetStaticProps<Props, { slug: string }> = async (
   const { slug } = ctx.params!;
   const post = await client.fetch(postBySlugQuery, { slug });
 
-  if (!post) {
-    return { notFound: true };
-  }
-
   return {
     props: {
       post,

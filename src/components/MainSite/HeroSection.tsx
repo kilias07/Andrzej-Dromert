@@ -15,7 +15,7 @@ const HeroSection = () => (
     >
       {/* @todo podpiąć link do posta */}
       <Link href="#">
-        <div className="absolute inset-y-0 right-4 -top-6 h-16 w-1/2 rounded bg-claretDark p-1 text-right text-backgroundColorTest shadow-2xl sm:-top-12 sm:h-24 md:w-1/3">
+        <div className="absolute inset-y-0 right-4 -top-6 h-16 w-1/2 rounded bg-claretDark p-1 text-right text-backgroundColorLight shadow-2xl sm:-top-12 sm:h-24 md:w-1/3">
           <h2 className="mt-5 text-xs font-light italic sm:mt-11 sm:text-base">
             Nawiasem mówiąc
           </h2>

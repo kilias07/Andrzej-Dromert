@@ -54,7 +54,7 @@ const BannerRowTop = ({ title, description }: BannerRow) => (
       }}
       className="flex w-1/2 items-center justify-center"
     >
-      <p className="w-[10rem] text-right lg:w-[20rem] lg:text-3xl">
+      <p className="w-[10rem] text-right font-light lg:w-[20rem] lg:text-3xl">
         {description}
       </p>
     </motion.div>

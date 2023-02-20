@@ -31,7 +31,7 @@ const Navbar = () => {
     <nav className="h-[100px]">
       <motion.div
         ref={refNavbar}
-        className="shadow-bottom fixed inset-0 z-50 bg-backgroundColorTest"
+        className="shadow-bottom fixed inset-0 z-50 bg-backgroundColorLight dark:bg-backgroundColorDark"
         style={{
           height: useTransform(
             scrollYBoundedProgressThrottled,
@@ -115,7 +115,7 @@ const Navbar = () => {
         <AnimatePresence>
           {isModalOpen && (
             <motion.ul
-              className="relative -z-10 flex flex-col gap-5 bg-backgroundColorTest py-3 dark:bg-grayLight lg:hidden"
+              className="relative -z-10 flex flex-col gap-5 bg-backgroundColorLight py-3 dark:bg-backgroundColorDark lg:hidden"
               initial={{ translateY: -200, opacity: 0 }}
               animate={{ translateY: -2, opacity: 1 }}
               exit={{ translateY: -200, opacity: 0 }}

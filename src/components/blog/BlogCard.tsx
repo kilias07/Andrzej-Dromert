@@ -36,7 +36,7 @@ const BlogCard = ({ post }: Post) => {
         <h1 className="my-3 h-20 text-xl font-semibold">{title}</h1>
         <div className="flex items-center justify-between">
           <CustomBtn link={`blog/${slug.current}`} />
-          <p className="text-xs text-grayLighter dark:text-grayLight">
+          <p className="text-xs text-grayLighter dark:text-backgroundColorDark">
             {new Date(publishedAt).toLocaleDateString('pl-PL')}
           </p>
         </div>

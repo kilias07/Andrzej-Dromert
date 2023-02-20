@@ -11,8 +11,10 @@ import BlogCard from '../../components/blog/BlogCard';
 import SearchPosts from '../../components/blog/searchPosts';
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = await client.fetch(PostsQuery);
-
+  const data = await client.fetch<PostFields[]>(PostsQuery);
+  const posts = data.sort(
+    (a, b) => Number(new Date(b.publishedAt)) - Number(new Date(a.publishedAt)),
+  );
   return {
     props: {
       posts,
@@ -34,6 +36,10 @@ const NoResults = () => (
 );
 
 const Blog: NextPage<{ posts: PostFields[] }> = ({ posts }) => {
+  posts.sort(
+    (a, b) => Number(new Date(b.publishedAt)) - Number(new Date(a.publishedAt)),
+  );
+
   const [searchPosts, setSearchPosts] = useState<PostFields[]>(posts);
   const searchItem = (query: string) => {
     if (!query) {
@@ -41,7 +47,7 @@ const Blog: NextPage<{ posts: PostFields[] }> = ({ posts }) => {
       return;
     }
     const fuse = new Fuse(posts, {
-      keys: ['title', 'categories.name.current'],
+      keys: ['title', 'categories.name.current', 'publishedAt'],
     });
     const results = fuse.search(query);
     const matches: PostFields[] | null = [];

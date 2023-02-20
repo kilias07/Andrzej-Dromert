@@ -12,12 +12,11 @@ module.exports = {
     extend: {
       colors: {
         primaryColorGray: '#1A1919',
-        grayLight: '#666262',
+        backgroundColorDark: '#666262',
         claretDark: '#330E0E',
         claretLight: '#664343',
         grayLighter: '#B3ABAB',
-        backgroundColor: '#F8FBFF',
-        backgroundColorTest: '#F8F8F7',
+        backgroundColorLight: '#F8F8F7',
         whiteCream: '#FFFEF9',
         cta: '#8F8C73',
       },
