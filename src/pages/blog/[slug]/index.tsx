@@ -1,6 +1,6 @@
 import Gallery from '@/components/blog/GalleryImage';
 import components from '@/lib/portableText';
-import { client, urlFor } from '@/lib/sanity.config';
+import { client } from '@/lib/sanity.config';
 import { postByIdQuery, postBySlugQuery } from '@/lib/sanity.queries';
 import { PostFields } from '@/lib/types';
 import { PortableText } from '@portabletext/react';
@@ -38,7 +38,6 @@ const Index: NextPage<Props> = ({ post }) => {
   const { title, body, gallery } = post;
   const mainImage = gallery.images.find((image) => image.mainImage)!;
   const imageProps = useNextSanityImage(client, mainImage);
-
   return (
     <motion.article
       className="container mx-auto h-fit"
@@ -54,7 +53,6 @@ const Index: NextPage<Props> = ({ post }) => {
         <div className="mx-auto max-w-5xl">
           <Img
             {...imageProps}
-            src={urlFor(mainImage.asset).url()}
             alt={mainImage.asset.altText || title}
             priority
             placeholder="blur"
@@ -62,7 +60,7 @@ const Index: NextPage<Props> = ({ post }) => {
           />
         </div>
       ) : (
-        <Gallery postImages={post.gallery.images} />
+        <Gallery postImages={gallery.images} />
       )}
       <div className="mx-auto mb-24 w-10/12">
         <PortableText value={body} components={components} />

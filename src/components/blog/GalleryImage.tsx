@@ -1,8 +1,9 @@
-import { urlFor } from '@/lib/sanity.config';
+import { client, urlFor } from '@/lib/sanity.config';
 import { ImageSanity } from '@/lib/types';
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
 import { NextPage } from 'next';
-import Image from 'next/image';
+import { useNextSanityImage } from 'next-sanity-image';
+import Img from 'next/image';
 import { useEffect, useState } from 'react';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 
@@ -10,6 +11,31 @@ const collapsedAspectRatio = 1 / 2;
 const fullAspectRatio = 3 / 2;
 const gap = 2;
 const margin = 12;
+
+interface GalleryImgProps {
+  image: ImageSanity;
+  i: number;
+  index: number;
+}
+
+const GalleryImg = ({ image, i, index }: GalleryImgProps) => {
+  const imageProps = useNextSanityImage(client, image);
+
+  return (
+    <motion.div
+      className="relative aspect-[3/2] w-fit shrink-0"
+      key={image.asset._id}
+      animate={{ opacity: i === index ? 1 : 0.3 }}
+    >
+      <Img
+        priority
+        {...imageProps}
+        quality={75}
+        alt={image.asset.altText || image.asset.originalFilename!}
+      />
+    </motion.div>
+  );
+};
 
 const Gallery: NextPage<{ postImages: ImageSanity[] }> = ({ postImages }) => {
   const [index, setIndex] = useState(0);
@@ -36,11 +62,11 @@ const Gallery: NextPage<{ postImages: ImageSanity[] }> = ({ postImages }) => {
           <div className="relative overflow-hidden">
             <motion.div animate={{ x: `-${index * 100}%` }} className="flex">
               {postImages.map((image, i) => (
-                <motion.img
+                <GalleryImg
                   key={image.asset._id}
-                  src={urlFor(image.asset).url()}
-                  animate={{ opacity: i === index ? 1 : 0.3 }}
-                  className="aspect-[3/2] object-contain"
+                  image={image}
+                  index={index}
+                  i={i}
                 />
               ))}
             </motion.div>
@@ -54,7 +80,7 @@ const Gallery: NextPage<{ postImages: ImageSanity[] }> = ({ postImages }) => {
                   className="absolute left-2 top-1/2 -mt-4 flex h-8 w-8 items-center justify-center rounded-full bg-white"
                   onClick={() => setIndex(index - 1)}
                 >
-                  <AiOutlineArrowLeft className="h-6 w-6" />
+                  <AiOutlineArrowLeft className="h-6 w-6 dark:text-black" />
                 </motion.button>
               )}
             </AnimatePresence>
@@ -69,7 +95,7 @@ const Gallery: NextPage<{ postImages: ImageSanity[] }> = ({ postImages }) => {
                   className="absolute right-2 top-1/2 -mt-4 flex h-8 w-8 items-center justify-center rounded-full bg-white"
                   onClick={() => setIndex(index + 1)}
                 >
-                  <AiOutlineArrowRight className="h-6 w-6" />
+                  <AiOutlineArrowRight className="h-6 w-6 dark:text-black" />
                 </motion.button>
               )}
             </AnimatePresence>
@@ -98,34 +124,32 @@ const Gallery: NextPage<{ postImages: ImageSanity[] }> = ({ postImages }) => {
                   whileHover={{ opacity: 1 }}
                   initial={false}
                   animate={i === index ? 'active' : 'inactive'}
+                  className="relative"
                   variants={{
                     active: {
+                      opacity: 1,
                       marginLeft: `${margin}%`,
                       marginRight: `${margin}%`,
-                      opacity: 1,
-                      aspectRatio: fullAspectRatio.toString(),
+                      aspectRatio: fullAspectRatio,
                     },
                     inactive: {
-                      marginLeft: '0%',
                       marginRight: '0%',
+                      marginLeft: '0%',
                       opacity: 0.5,
-                      aspectRatio: collapsedAspectRatio.toString(),
+                      aspectRatio: collapsedAspectRatio,
                     },
                   }}
-                  className="shrink-0"
                 >
-                  <motion.div className="relative h-full">
-                    <Image
-                      src={urlFor(image.asset).url()}
-                      className="object-cover object-center"
-                      fill
-                      sizes={'80px'}
-                      quality={10}
-                      alt={image.asset.altText || image.asset.originalFilename!}
-                      placeholder="blur"
-                      blurDataURL={image.asset.metadata.lqip}
-                    />
-                  </motion.div>
+                  <Img
+                    src={urlFor(image.asset).url()}
+                    className="object-cover object-center"
+                    fill
+                    sizes={'80px'}
+                    quality={10}
+                    alt={image.asset.altText || image.asset.originalFilename!}
+                    placeholder="blur"
+                    blurDataURL={image.asset.metadata.lqip}
+                  />
                 </motion.button>
               ))}
             </motion.div>
