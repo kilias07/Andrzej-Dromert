@@ -1,9 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  distDir: ".next",
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["cdn.sanity.io"],
+    remotePatterns: [{ hostname: "cdn.sanity.io" }],
   },
   experimental: {
     nextScriptWorkers: true,

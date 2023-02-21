@@ -119,7 +119,7 @@ const Gallery: NextPage<{ postImages: ImageSanity[] }> = ({ postImages }) => {
                       src={urlFor(image.asset).url()}
                       className="object-cover object-center"
                       fill
-                      sizes={'40px'}
+                      sizes={'80px'}
                       quality={10}
                       alt={image.asset.altText || image.asset.originalFilename!}
                       placeholder="blur"
