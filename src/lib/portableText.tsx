@@ -38,9 +38,7 @@ const components: PortableTextComponents = {
     externalLink: ({ children }) => <div>{children}</div>,
     internalLink: ({ children }) => <div>{children}</div>,
   },
-  // @todo add class border-1
   block: {
-    h1: ({ children }) => <h1 className="text-7xl">{children}</h1>,
     h2: ({ children }) => <h2 className="my-10 text-6xl">{children}</h2>,
     h3: ({ children }) => <h3 className="my-10 text-5xl">{children}</h3>,
     h4: ({ children }) => <h4 className="my-10 text-4xl">{children}</h4>,

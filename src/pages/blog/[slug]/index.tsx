@@ -28,9 +28,10 @@ export const getStaticProps: GetStaticProps<Props, { slug: string }> = async (
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await client.fetch(postByIdQuery);
+  console.log(paths);
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 };
 

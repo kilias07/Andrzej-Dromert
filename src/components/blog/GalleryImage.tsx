@@ -28,10 +28,14 @@ const GalleryImg = ({ image, i, index }: GalleryImgProps) => {
       animate={{ opacity: i === index ? 1 : 0.3 }}
     >
       <Img
-        priority
         {...imageProps}
+        priority
         quality={75}
-        alt={image.asset.altText || image.asset.originalFilename!}
+        placeholder="blur"
+        blurDataURL={image.asset.metadata.lqip}
+        alt={
+          image.asset.altText || image.asset.originalFilename?.split('.')[0]!
+        }
       />
     </motion.div>
   );
@@ -146,7 +150,10 @@ const Gallery: NextPage<{ postImages: ImageSanity[] }> = ({ postImages }) => {
                     fill
                     sizes={'80px'}
                     quality={10}
-                    alt={image.asset.altText || image.asset.originalFilename!}
+                    alt={`miniaturka ${
+                      image.asset.altText
+                      || image.asset.originalFilename?.split('.')[0]!
+                    }`}
                     placeholder="blur"
                     blurDataURL={image.asset.metadata.lqip}
                   />
