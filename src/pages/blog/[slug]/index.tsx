@@ -16,7 +16,7 @@ interface Props {
 export const getStaticProps: GetStaticProps<Props, { slug: string }> = async (
   ctx,
 ) => {
-  const { slug } = ctx.params!;
+  const { slug = '' } = ctx.params!;
   const post = await client.fetch(postBySlugQuery, { slug });
   return {
     props: {
@@ -30,7 +30,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await client.fetch(postByIdQuery);
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 };
 

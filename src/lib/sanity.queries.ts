@@ -63,7 +63,7 @@ export const postBySlugQuery = groq`
 `;
 // For getStaticPaths
 export const postByIdQuery = groq`
-    *[_type == "post" && defined(slug.current)]{
+    *[_type == "post" && defined(slug.current)][]{
         "params": {
             "slug": slug.current
         }
