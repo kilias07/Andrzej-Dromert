@@ -61,6 +61,8 @@ const Blog: NextPage<{ posts: PostFields[] }> = ({ posts }) => {
       setSearchPosts([]);
     }
   };
+
+  if (!posts) return null;
   if (posts.length === 0) return <NoResults />;
 
   return (

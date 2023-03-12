@@ -59,6 +59,7 @@ const Gallery: NextPage<{ postImages: ImageSanity[] }> = ({ postImages }) => {
     };
   }, [index, postImages.length]);
 
+  if (!postImages) return <div>loading...</div>;
   return (
     <MotionConfig transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}>
       <div className="h-fit">

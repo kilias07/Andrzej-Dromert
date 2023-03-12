@@ -16,7 +16,8 @@ interface Props {
 export const getStaticProps: GetStaticProps<Props, { slug: string }> = async (
   ctx,
 ) => {
-  const { slug = '' } = ctx.params!;
+  if (!ctx.params) return { notFound: true };
+  const { slug } = ctx.params!;
   const post = await client.fetch(postBySlugQuery, { slug });
   return {
     props: {
@@ -34,10 +35,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-const Index: NextPage<Props> = ({ post }) => {
+const Index: NextPage<Props> = ({ post = null }) => {
+  if (!post) return <div>loading...</div>;
   const { title, body, gallery } = post;
-  const mainImage = gallery.images.find((image) => image.mainImage)!;
+  const mainImage = gallery?.images.find((image) => image.mainImage)!;
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const imageProps = useNextSanityImage(client, mainImage);
+
   return (
     <motion.article
       className="container mx-auto h-fit"
@@ -47,20 +51,20 @@ const Index: NextPage<Props> = ({ post }) => {
       transition={{ duration: 0.6 }}
     >
       <h1 className="mt-20 text-center text-4xl leading-snug md:my-20 md:text-6xl xl:text-9xl xl:leading-poppins-fit">
-        {post.title}
+        {title}
       </h1>
-      {post.gallery.images.length === 1 ? (
+      {gallery?.images.length === 1 ? (
         <div className="mx-auto max-w-5xl">
           <Img
             {...imageProps}
-            alt={mainImage.asset.altText || title}
+            alt={mainImage?.asset.altText || title}
             priority
             placeholder="blur"
-            blurDataURL={mainImage.asset.metadata.lqip}
+            blurDataURL={mainImage?.asset.metadata.lqip}
           />
         </div>
       ) : (
-        <Gallery postImages={gallery.images} />
+        <Gallery postImages={gallery?.images} />
       )}
       <div className="mx-auto mb-24 w-10/12">
         <PortableText value={body} components={components} />
