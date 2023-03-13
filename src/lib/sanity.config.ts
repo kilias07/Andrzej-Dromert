@@ -26,7 +26,7 @@ const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: false,
+  useCdn: true,
 });
 
 const builder = ImageUrlBuilder(client);

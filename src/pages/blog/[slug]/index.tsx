@@ -16,7 +16,6 @@ interface Props {
 export const getStaticProps: GetStaticProps<Props, { slug: string }> = async (
   ctx,
 ) => {
-  if (!ctx.params) return { notFound: true };
   const { slug } = ctx.params!;
   const post = await client.fetch(postBySlugQuery, { slug });
   return {
@@ -28,19 +27,31 @@ export const getStaticProps: GetStaticProps<Props, { slug: string }> = async (
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await client.fetch(postByIdQuery);
+  const paths = (await client.fetch(postByIdQuery)) || [];
   return {
     paths,
     fallback: true,
   };
 };
+const MainImage = ({ gallery }: { gallery: PostFields['gallery'] }) => {
+  const mainImage = gallery?.images.find((image) => image.mainImage)!;
+  const imageProps = useNextSanityImage(client, mainImage) as any;
+  return (
+    <div className="mx-auto max-w-5xl">
+      <Img
+        {...imageProps}
+        alt={mainImage?.asset.altText || mainImage?.asset.originalFilename}
+        priority
+        placeholder="blur"
+        blurDataURL={mainImage?.asset.metadata.lqip}
+      />
+    </div>
+  );
+};
 
 const Index: NextPage<Props> = ({ post = null }) => {
-  if (!post) return <div>loading...</div>;
+  if (!post) return null;
   const { title, body, gallery } = post;
-  const mainImage = gallery?.images.find((image) => image.mainImage)!;
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const imageProps = useNextSanityImage(client, mainImage);
 
   return (
     <motion.article
@@ -54,15 +65,7 @@ const Index: NextPage<Props> = ({ post = null }) => {
         {title}
       </h1>
       {gallery?.images.length === 1 ? (
-        <div className="mx-auto max-w-5xl">
-          <Img
-            {...imageProps}
-            alt={mainImage?.asset.altText || title}
-            priority
-            placeholder="blur"
-            blurDataURL={mainImage?.asset.metadata.lqip}
-          />
-        </div>
+        <MainImage gallery={gallery} />
       ) : (
         <Gallery postImages={gallery?.images} />
       )}
